@@ -90,6 +90,11 @@ final class BerlinClockTests: XCTestCase {
     func testIntegrateSecondMinuteAndHour_AllHoursOn(){
         XCTAssertEqual("O RRRR RRRR OOOOOOOOOOO OOOO", berlinClock.convertToBerlinTime("24:00:01"))
     }
-   
+    func testIntegrateSecondMinuteAndHour_AllMinutesLampOn(){
+        XCTAssertEqual("O OOOO OOOO YYRYYRYYRYY YYYY", berlinClock.convertToBerlinTime("00:59:59"))
+    }
+    func testIntegrateSecondMinuteAndHour_MaximumLampOn(){
+        XCTAssertEqual("O RRRR RRRO YYRYYRYYRYY YYYY", berlinClock.convertToBerlinTime("23:59:59"))
+    }
     
 }
