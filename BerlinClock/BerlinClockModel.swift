@@ -9,6 +9,27 @@ import Foundation
 
 class BerlinClockModel {
    
+    func convertToBerlinTime(_ time: String) -> String {
+        let components = time.components(separatedBy: ":")
+        
+        guard components.count == 3,
+              let hours = Int(components[0]),
+              let minutes = Int(components[1]),
+              let seconds = Int(components[2]) else {
+            return "Invalid time format"
+        }
+        
+        let secondsLamp = checkSecondsLamp(seconds: seconds)
+        let topHoursLamps = checkTopFiveHourLamp(hour: hours)
+        let bottomHoursLamps = checkBottomOneHourLamp(hour: hours)
+        let topMinutesLamps = checkTopFiveMinuteLamp(minute: minutes)
+        let bottomMinutesLamps = checkBottomOneMinuteLamp(minute: minutes)
+        
+        let berlinTime = "\(secondsLamp) \(topHoursLamps) \(bottomHoursLamps) \(topMinutesLamps) \(bottomMinutesLamps)"
+        
+        return berlinTime
+    }
+    
     func checkSecondsLamp(seconds: Int) -> String{
         return ((seconds % 2) == 0) ? "Y" : "O"
     }

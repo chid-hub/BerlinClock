@@ -81,4 +81,7 @@ final class BerlinClockTests: XCTestCase {
         XCTAssertEqual("RRRR", berlinClock.checkTopFiveHourLamp(hour: 20))
     }
     
+    func testCombineSecondMinuteAndHourConvertToBerlinTime_AllOff(){
+        XCTAssertEqual("O OOOO OOOO OOOOOOOOOOO OOOO", berlinClock.convertToBerlinTime("00:00:01"))
+    }
 }
