@@ -20,6 +20,9 @@ class BerlinClockModel {
         if (minute % 5) == 2 {
             return "YYOO"
         }
+        if (minute % 5) == 3 {
+            return "YYYO"
+        }
         
         return "OOOO"
     }

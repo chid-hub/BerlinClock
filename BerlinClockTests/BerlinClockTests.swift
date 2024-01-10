@@ -28,4 +28,7 @@ final class BerlinClockTests: XCTestCase {
     func testBottom1MinutesLamp_FirstAndSecondOn(){
         XCTAssertEqual("YYOO", berlinClock.checkBottomOneMinuteLamp(minute: 2))
     }
+    func testBottom1MinutesLamp_FirstAndSecondAndThirdOn(){
+        XCTAssertEqual("YYYO", berlinClock.checkBottomOneMinuteLamp(minute: 3))
+    }
 }
