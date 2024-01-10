@@ -69,6 +69,16 @@ final class BerlinClockTests: XCTestCase {
     }
 
     func testTop5HourLamp_AllOff(){
-        XCTAssertEqual("OOOO", berlinClock.checkBottomFiveHourLamp(hour: 0))
+        XCTAssertEqual("OOOO", berlinClock.checkTopFiveHourLamp(hour: 0))
     }
+    func testTop5HourLamp_FirstOn(){
+        XCTAssertEqual("ROOO", berlinClock.checkTopFiveHourLamp(hour: 5))
+    }
+    func testTop5HourLamp_FirstAndSecondOn(){
+        XCTAssertEqual("RROO", berlinClock.checkTopFiveHourLamp(hour: 10))
+    }
+    func testTop5HourLamp_AllOn(){
+        XCTAssertEqual("RRRR", berlinClock.checkTopFiveHourLamp(hour: 20))
+    }
+    
 }
