@@ -14,9 +14,13 @@ class BerlinClockModel {
     }
     
     func checkBottomOneMinuteLamp(minute: Int) -> String{
-        if (minute % 5) != 0 {
+        if (minute % 5) == 1 {
             return "YOOO"
         }
+        if (minute % 5) == 2 {
+            return "YYOO"
+        }
+        
         return "OOOO"
     }
     
