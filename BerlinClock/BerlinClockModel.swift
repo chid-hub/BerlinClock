@@ -9,7 +9,8 @@ import Foundation
 
 class BerlinClockModel {
    
-    func checkSecondsLamp(secons: Int) -> String{
-        return "O"
+    func checkSecondsLamp(seconds: Int) -> String{
+        return ((seconds % 2) == 0) ? "Y" : "O"
     }
+    
 }

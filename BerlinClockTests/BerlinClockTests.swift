@@ -13,6 +13,9 @@ final class BerlinClockTests: XCTestCase {
     let berlinClock = BerlinClockModel()
     
     func testSecondsLamp_Off(){
-        XCTAssertEqual("O", berlinClock.checkSecondsLamp(secons: 0))
+        XCTAssertEqual("O", berlinClock.checkSecondsLamp(seconds: 0))
+    }
+    func testSecondsLamp_On(){
+        XCTAssertEqual("Y", berlinClock.checkSecondsLamp(seconds: 2))
     }
 }
