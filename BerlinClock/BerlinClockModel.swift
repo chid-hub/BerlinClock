@@ -21,4 +21,12 @@ class BerlinClockModel {
         return char.joined()
     }
     
+    func checkTopFiveMinuteLamp(minute: Int) -> String{
+        var char = Array(repeating: "O", count: 11)
+        for i in 0..<(minute / 5) {
+            char[i] = "Y"
+        }
+        return char.joined()
+    }
+    
 }
