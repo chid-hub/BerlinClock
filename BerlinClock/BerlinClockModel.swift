@@ -13,4 +13,8 @@ class BerlinClockModel {
         return ((seconds % 2) == 0) ? "Y" : "O"
     }
     
+    func checkBottomOneMinuteLamp(minute: Int) -> String{
+        return "OOOO"
+    }
+    
 }
