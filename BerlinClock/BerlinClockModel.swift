@@ -14,20 +14,11 @@ class BerlinClockModel {
     }
     
     func checkBottomOneMinuteLamp(minute: Int) -> String{
-        if (minute % 5) == 1 {
-            return "YOOO"
+        var char = Array(repeating: "O", count: 4)
+        for i in 0..<(minute % 5) {
+            char[i] = "Y"
         }
-        if (minute % 5) == 2 {
-            return "YYOO"
-        }
-        if (minute % 5) == 3 {
-            return "YYYO"
-        }
-        if (minute % 5) == 4 {
-            return "YYYY"
-        }
-        
-        return "OOOO"
+        return char.joined()
     }
     
 }
