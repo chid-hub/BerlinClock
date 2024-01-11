@@ -35,15 +35,15 @@ class BerlinClockModel {
 extension BerlinClockModel {
     
     private func checkSecondsLamp(seconds: Int) -> Lamp{
-        return ((seconds % 2) == 0) ? .yellow : .off
+        return ((seconds % AppConstants.secondsLampBlinkPerSeconds) == 0) ? .yellow : .off
     }
     
     private func checkBottomOneMinuteLamp(minute: Int) -> [Lamp]{
-        return (0..<4).map { $0 < (minute % 5) ? .yellow : .off}
+        return (0..<AppConstants.numberOfOneMinuteLamp).map { $0 < (minute % 5) ? .yellow : .off}
     }
     
     private func isQuarterMinute(_ minute: Int) -> Bool {
-        return (minute % 3) == 0
+        return (minute % AppConstants.quartersInFiveMinutesLamp) == 0
     }
     
     private func checkTopFiveMinuteLamp(minute: Int) -> [Lamp]{
@@ -55,10 +55,10 @@ extension BerlinClockModel {
     }
     
     private func checkBottomOneHourLamp(hour: Int) -> [Lamp]{
-        return (0..<4).map { $0 < (hour % 5) ? .red : .off}
+        return (0..<AppConstants.numberOfOneHourLamp).map { $0 < (hour % 5) ? .red : .off}
     }
     
     private func checkTopFiveHourLamp(hour: Int) -> [Lamp]{
-        return (0..<4).map { $0 < (hour / 5) ? .red : .off}
+        return (0..<AppConstants.numberOfFiveHourLamp).map { $0 < (hour / 5) ? .red : .off}
     }
 }

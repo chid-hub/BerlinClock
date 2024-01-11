@@ -14,10 +14,10 @@ enum Lamp: String{
 }
 
 struct BerlinClockLamps {
+    // initial set all values to off
     var second: Lamp = .off
-    var topHours: [Lamp] = Array(repeating: .off, count: 4)
-    var bottomHours: [Lamp] = Array(repeating: .off, count: 4)
-    var topMinutes: [Lamp] = Array(repeating: .off, count: 11)
-    var bottomMinutes: [Lamp] = Array(repeating: .off, count: 4)
-    
+    var topHours: [Lamp] = Array(repeating: .off, count: AppConstants.numberOfFiveHourLamp)
+    var bottomHours: [Lamp] = Array(repeating: .off, count: AppConstants.numberOfOneHourLamp)
+    var topMinutes: [Lamp] = Array(repeating: .off, count: AppConstants.numberOfFiveMinuteLamp)
+    var bottomMinutes: [Lamp] = Array(repeating: .off, count: AppConstants.numberOfOneMinuteLamp)
 }
