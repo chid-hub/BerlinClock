@@ -9,25 +9,25 @@ import Foundation
 
 class BerlinClockModel {
    
-    func convertToBerlinTime(_ time: String) -> String {
+    func convertToBerlinTime(_ time: String) -> BerlinClockLamps {
         let components = time.components(separatedBy: ":")
         
         guard components.count == 3,
               let hours = Int(components[0]),
               let minutes = Int(components[1]),
               let seconds = Int(components[2]) else {
-            return "Invalid time format"
+            return BerlinClockLamps()
         }
         
         let secondsLamp = checkSecondsLamp(seconds: seconds)
-        let topHoursLamps = checkTopFiveHourLamp(hour: hours)
-        let bottomHoursLamps = checkBottomOneHourLamp(hour: hours)
-        let topMinutesLamps = checkTopFiveMinuteLamp(minute: minutes)
-        let bottomMinutesLamps = checkBottomOneMinuteLamp(minute: minutes)
+        let topHoursLamps = checkTopFiveHourLamp(hour: hours).map({ String($0) })
+        let bottomHoursLamps = checkBottomOneHourLamp(hour: hours).map({ String($0) })
+        let topMinutesLamps = checkTopFiveMinuteLamp(minute: minutes).map({ String($0) })
+        let bottomMinutesLamps = checkBottomOneMinuteLamp(minute: minutes).map({ String($0) })
         
-        let berlinTime = "\(secondsLamp) \(topHoursLamps) \(bottomHoursLamps) \(topMinutesLamps) \(bottomMinutesLamps)"
-        
-        return berlinTime
+        let berlinClockLamps = BerlinClockLamps(second: secondsLamp, topHours: topHoursLamps, bottomHours: bottomHoursLamps, topMinutes:topMinutesLamps, bottomMinutes: bottomMinutesLamps)
+            
+        return berlinClockLamps
     }
     
     func checkSecondsLamp(seconds: Int) -> String{

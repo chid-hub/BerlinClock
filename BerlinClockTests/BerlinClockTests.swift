@@ -82,19 +82,23 @@ final class BerlinClockTests: XCTestCase {
     }
     
     func testIntegrateSecondMinuteAndHour_AllLampOff(){
-        XCTAssertEqual("O OOOO OOOO OOOOOOOOOOO OOOO", berlinClock.convertToBerlinTime("00:00:01"))
+        let lamps = berlinClock.convertToBerlinTime("00:00:01")
+        XCTAssertEqual("O OOOO OOOO OOOOOOOOOOO OOOO", lamps.integrateSecondMinuteAndHour())
     }
     func testIntegrateSecondMinuteAndHour_SecondsLampOn(){
-        XCTAssertEqual("Y OOOO OOOO OOOOOOOOOOO OOOO", berlinClock.convertToBerlinTime("00:00:00"))
+        let lamps = berlinClock.convertToBerlinTime("00:00:00")
+        XCTAssertEqual("Y OOOO OOOO OOOOOOOOOOO OOOO", lamps.integrateSecondMinuteAndHour())
     }
     func testIntegrateSecondMinuteAndHour_AllHoursOn(){
-        XCTAssertEqual("O RRRR RRRR OOOOOOOOOOO OOOO", berlinClock.convertToBerlinTime("24:00:01"))
+        let lamps = berlinClock.convertToBerlinTime("24:00:01")
+        XCTAssertEqual("O RRRR RRRR OOOOOOOOOOO OOOO", lamps.integrateSecondMinuteAndHour())
     }
     func testIntegrateSecondMinuteAndHour_AllMinutesLampOn(){
-        XCTAssertEqual("O OOOO OOOO YYRYYRYYRYY YYYY", berlinClock.convertToBerlinTime("00:59:59"))
+        let lamps = berlinClock.convertToBerlinTime("00:59:59")
+        XCTAssertEqual("O OOOO OOOO YYRYYRYYRYY YYYY", lamps.integrateSecondMinuteAndHour())
     }
     func testIntegrateSecondMinuteAndHour_MaximumLampOn(){
-        XCTAssertEqual("O RRRR RRRO YYRYYRYYRYY YYYY", berlinClock.convertToBerlinTime("23:59:59"))
-    }
+        let lamps = berlinClock.convertToBerlinTime("23:59:59")
+        XCTAssertEqual("O RRRR RRRO YYRYYRYYRYY YYYY", lamps.integrateSecondMinuteAndHour())    }
     
 }
