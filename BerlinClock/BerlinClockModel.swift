@@ -50,12 +50,8 @@ class BerlinClockModel {
         return (0..<4).map { $0 < (hour % 5) ? "R" : "O"}
     }
     
-    func checkTopFiveHourLamp(hour: Int) -> String{
-        var char = Array(repeating: "O", count: 4)
-        for i in 0..<(hour / 5) {
-            char[i] = "R"
-        }
-        return char.joined()
+    func checkTopFiveHourLamp(hour: Int) -> [String]{
+        return (0..<4).map { $0 < (hour / 5) ? "R" : "O"}
     }
     
 }
