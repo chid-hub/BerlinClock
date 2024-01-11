@@ -22,7 +22,7 @@ class BerlinClockModel {
         let secondsLamp = checkSecondsLamp(seconds: seconds)
         let topHoursLamps = checkTopFiveHourLamp(hour: hours).map({ String($0) })
         let bottomHoursLamps = checkBottomOneHourLamp(hour: hours).map({ String($0) })
-        let topMinutesLamps = checkTopFiveMinuteLamp(minute: minutes).map({ String($0) })
+        let topMinutesLamps = checkTopFiveMinuteLamp(minute: minutes)
         let bottomMinutesLamps = checkBottomOneMinuteLamp(minute: minutes)
         
         let berlinClockLamps = BerlinClockLamps(second: secondsLamp, topHours: topHoursLamps, bottomHours: bottomHoursLamps, topMinutes:topMinutesLamps, bottomMinutes: bottomMinutesLamps)
@@ -38,12 +38,12 @@ class BerlinClockModel {
         return (0..<4).map { $0 < (minute % 5) ? "Y" : "O"}
     }
     
-    func checkTopFiveMinuteLamp(minute: Int) -> String{
-        var char = Array(repeating: "O", count: 11)
+    func checkTopFiveMinuteLamp(minute: Int) -> [String]{
+        var fiveMinuteLamp = Array(repeating: "O", count: 11)
         for i in 0..<(minute / 5) {
-            char[i] = ((i + 1) % 3) == 0 ? "R": "Y"
+            fiveMinuteLamp[i] = ((i + 1) % 3) == 0 ? "R": "Y"
         }
-        return char.joined()
+        return fiveMinuteLamp
     }
     
     func checkBottomOneHourLamp(hour: Int) -> String{

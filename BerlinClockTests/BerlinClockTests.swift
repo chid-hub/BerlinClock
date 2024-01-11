@@ -42,22 +42,28 @@ final class BerlinClockTests: XCTestCase {
     }
     
     func testTop5MinutesLamp_AllOff(){
-        XCTAssertEqual("OOOOOOOOOOO", berlinClock.checkTopFiveMinuteLamp(minute: 0))
+        let lamps = berlinClock.convertToBerlinTime("00:00:00")
+        XCTAssertEqual("OOOOOOOOOOO", lamps.topMinutes.joined())
     }
     func testTop5MinutesLamp_FirstOn(){
-        XCTAssertEqual("YOOOOOOOOOO", berlinClock.checkTopFiveMinuteLamp(minute: 5))
+        let lamps = berlinClock.convertToBerlinTime("00:05:00")
+        XCTAssertEqual("YOOOOOOOOOO", lamps.topMinutes.joined())
     }
     func testTop5MinutesLamp_FirstAndSecondOn(){
-        XCTAssertEqual("YYOOOOOOOOO", berlinClock.checkTopFiveMinuteLamp(minute: 10))
+        let lamps = berlinClock.convertToBerlinTime("00:10:00")
+        XCTAssertEqual("YYOOOOOOOOO", lamps.topMinutes.joined())
     }
     func testTop5MinutesLamp_FirstQuarterOn(){
-        XCTAssertEqual("YYROOOOOOOO", berlinClock.checkTopFiveMinuteLamp(minute: 15))
+        let lamps = berlinClock.convertToBerlinTime("00:15:00")
+        XCTAssertEqual("YYROOOOOOOO", lamps.topMinutes.joined())
     }
     func testTop5MinutesLamp_AllQuarterOn(){
-        XCTAssertEqual("YYRYYRYYROO", berlinClock.checkTopFiveMinuteLamp(minute: 45))
+        let lamps = berlinClock.convertToBerlinTime("00:45:00")
+        XCTAssertEqual("YYRYYRYYROO", lamps.topMinutes.joined())
     }
     func testTop5MinutesLamp_AllOn(){
-        XCTAssertEqual("YYRYYRYYRYY", berlinClock.checkTopFiveMinuteLamp(minute: 55))
+        let lamps = berlinClock.convertToBerlinTime("00:55:00")
+        XCTAssertEqual("YYRYYRYYRYY", lamps.topMinutes.joined())
     }
     
     func testTopOneHourLamp_AllOff(){
