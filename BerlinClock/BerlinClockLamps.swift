@@ -7,11 +7,17 @@
 
 import Foundation
 
+enum Lamp: String{
+   case off = "O"
+   case red = "R"
+   case yellow = "Y"
+}
+
 struct BerlinClockLamps {
-    var second: String = "O"
-    var topHours: [String] = ["O","O","O","O"]
-    var bottomHours: [String] = ["O","O","O","O"]
-    var topMinutes: [String] = ["O","O","O","O","O","O","O","O","O","O","O"]
-    var bottomMinutes: [String] = ["O","O","O","O"]
+    var second: Lamp = .off
+    var topHours: [Lamp] = Array(repeating: .off, count: 4)
+    var bottomHours: [Lamp] = Array(repeating: .off, count: 4)
+    var topMinutes: [Lamp] = Array(repeating: .off, count: 11)
+    var bottomMinutes: [Lamp] = Array(repeating: .off, count: 4)
     
 }

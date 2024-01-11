@@ -20,7 +20,7 @@ class BerlinClockModel {
         }
         
         let secondsLamp = checkSecondsLamp(seconds: seconds)
-        let topHoursLamps = checkTopFiveHourLamp(hour: hours).map({ String($0) })
+        let topHoursLamps = checkTopFiveHourLamp(hour: hours)
         let bottomHoursLamps = checkBottomOneHourLamp(hour: hours)
         let topMinutesLamps = checkTopFiveMinuteLamp(minute: minutes)
         let bottomMinutesLamps = checkBottomOneMinuteLamp(minute: minutes)
@@ -30,28 +30,31 @@ class BerlinClockModel {
         return berlinClockLamps
     }
     
-    func checkSecondsLamp(seconds: Int) -> String{
-        return ((seconds % 2) == 0) ? "Y" : "O"
+}
+
+extension BerlinClockModel {
+    
+    private func checkSecondsLamp(seconds: Int) -> Lamp{
+        return ((seconds % 2) == 0) ? .yellow : .off
     }
     
-    func checkBottomOneMinuteLamp(minute: Int) -> [String]{
-        return (0..<4).map { $0 < (minute % 5) ? "Y" : "O"}
+    private func checkBottomOneMinuteLamp(minute: Int) -> [Lamp]{
+        return (0..<4).map { $0 < (minute % 5) ? .yellow : .off}
     }
     
-    func checkTopFiveMinuteLamp(minute: Int) -> [String]{
-        var fiveMinuteLamp = Array(repeating: "O", count: 11)
+    private func checkTopFiveMinuteLamp(minute: Int) -> [Lamp]{
+        var fiveMinuteLamp = Array<Lamp>(repeating: .off, count: 11)
         for i in 0..<(minute / 5) {
-            fiveMinuteLamp[i] = ((i + 1) % 3) == 0 ? "R": "Y"
+            fiveMinuteLamp[i] = ((i + 1) % 3) == 0 ? .red : .yellow
         }
         return fiveMinuteLamp
     }
     
-    func checkBottomOneHourLamp(hour: Int) -> [String]{
-        return (0..<4).map { $0 < (hour % 5) ? "R" : "O"}
+    private func checkBottomOneHourLamp(hour: Int) -> [Lamp]{
+        return (0..<4).map { $0 < (hour % 5) ? .red : .off}
     }
     
-    func checkTopFiveHourLamp(hour: Int) -> [String]{
-        return (0..<4).map { $0 < (hour / 5) ? "R" : "O"}
+    private func checkTopFiveHourLamp(hour: Int) -> [Lamp]{
+        return (0..<4).map { $0 < (hour / 5) ? .red : .off}
     }
-    
 }

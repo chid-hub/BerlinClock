@@ -13,92 +13,92 @@ final class BerlinClockTests: XCTestCase {
     
     func testSecondsLamp_Off(){
         let lamps = berlinClock.convertToBerlinTime("00:00:01")
-        XCTAssertEqual("O", lamps.second)
+        XCTAssertEqual("O", lamps.second.rawValue)
     }
     func testSecondsLamp_On(){
         let lamps = berlinClock.convertToBerlinTime("00:00:00")
-        XCTAssertEqual("Y", lamps.second)
+        XCTAssertEqual("Y", lamps.second.rawValue)
     }
     
     func testBottom1MinutesLamp_AllOff(){
         let lamps = berlinClock.convertToBerlinTime("00:00:00")
-        XCTAssertEqual("OOOO", lamps.bottomMinutes.joined())
+        XCTAssertEqual("OOOO", lamps.bottomMinutes.map({$0.rawValue}).joined())
     }
     func testBottom1MinutesLamp_FirstOn(){
         let lamps = berlinClock.convertToBerlinTime("00:01:0")
-        XCTAssertEqual("YOOO", lamps.bottomMinutes.joined())
+        XCTAssertEqual("YOOO", lamps.bottomMinutes.map({$0.rawValue}).joined())
     }
     func testBottom1MinutesLamp_FirstAndSecondOn(){
         let lamps = berlinClock.convertToBerlinTime("00:02:01")
-        XCTAssertEqual("YYOO", lamps.bottomMinutes.joined())
+        XCTAssertEqual("YYOO", lamps.bottomMinutes.map({$0.rawValue}).joined())
     }
     func testBottom1MinutesLamp_FirstAndSecondAndThirdOn(){
         let lamps = berlinClock.convertToBerlinTime("00:03:01")
-        XCTAssertEqual("YYYO", lamps.bottomMinutes.joined())
+        XCTAssertEqual("YYYO", lamps.bottomMinutes.map({$0.rawValue}).joined())
     }
     func testBottom1MinutesLamp_AllOn(){
         let lamps = berlinClock.convertToBerlinTime("00:04:01")
-        XCTAssertEqual("YYYY", lamps.bottomMinutes.joined())
+        XCTAssertEqual("YYYY", lamps.bottomMinutes.map({$0.rawValue}).joined())
     }
     
     func testTop5MinutesLamp_AllOff(){
         let lamps = berlinClock.convertToBerlinTime("00:00:00")
-        XCTAssertEqual("OOOOOOOOOOO", lamps.topMinutes.joined())
+        XCTAssertEqual("OOOOOOOOOOO", lamps.topMinutes.map({$0.rawValue}).joined())
     }
     func testTop5MinutesLamp_FirstOn(){
         let lamps = berlinClock.convertToBerlinTime("00:05:00")
-        XCTAssertEqual("YOOOOOOOOOO", lamps.topMinutes.joined())
+        XCTAssertEqual("YOOOOOOOOOO", lamps.topMinutes.map({$0.rawValue}).joined())
     }
     func testTop5MinutesLamp_FirstAndSecondOn(){
         let lamps = berlinClock.convertToBerlinTime("00:10:00")
-        XCTAssertEqual("YYOOOOOOOOO", lamps.topMinutes.joined())
+        XCTAssertEqual("YYOOOOOOOOO", lamps.topMinutes.map({$0.rawValue}).joined())
     }
     func testTop5MinutesLamp_FirstQuarterOn(){
         let lamps = berlinClock.convertToBerlinTime("00:15:00")
-        XCTAssertEqual("YYROOOOOOOO", lamps.topMinutes.joined())
+        XCTAssertEqual("YYROOOOOOOO", lamps.topMinutes.map({$0.rawValue}).joined())
     }
     func testTop5MinutesLamp_AllQuarterOn(){
         let lamps = berlinClock.convertToBerlinTime("00:45:00")
-        XCTAssertEqual("YYRYYRYYROO", lamps.topMinutes.joined())
+        XCTAssertEqual("YYRYYRYYROO", lamps.topMinutes.map({$0.rawValue}).joined())
     }
     func testTop5MinutesLamp_AllOn(){
         let lamps = berlinClock.convertToBerlinTime("00:55:00")
-        XCTAssertEqual("YYRYYRYYRYY", lamps.topMinutes.joined())
+        XCTAssertEqual("YYRYYRYYRYY", lamps.topMinutes.map({$0.rawValue}).joined())
     }
     
     func testTopOneHourLamp_AllOff(){
         let lamps = berlinClock.convertToBerlinTime("00:00:00")
-        XCTAssertEqual("OOOO", lamps.bottomHours.joined())
+        XCTAssertEqual("OOOO", lamps.bottomHours.map({$0.rawValue}).joined())
     }
     func testTopOneHourLamp_FirstOn(){
         let lamps = berlinClock.convertToBerlinTime("06:00:00")
-        XCTAssertEqual("ROOO", lamps.bottomHours.joined())
+        XCTAssertEqual("ROOO", lamps.bottomHours.map({$0.rawValue}).joined())
     }
     
     func testTopOneHourLamp_FirstAndSecondOn(){
         let lamps = berlinClock.convertToBerlinTime("07:00:00")
-        XCTAssertEqual("RROO", lamps.bottomHours.joined())
+        XCTAssertEqual("RROO", lamps.bottomHours.map({$0.rawValue}).joined())
     }
     func testTopOneHourLamp_AllOn(){
         let lamps = berlinClock.convertToBerlinTime("09:00:00")
-        XCTAssertEqual("RRRR", lamps.bottomHours.joined())
+        XCTAssertEqual("RRRR", lamps.bottomHours.map({$0.rawValue}).joined())
     }
 
     func testTop5HourLamp_AllOff(){
         let lamps = berlinClock.convertToBerlinTime("00:00:00")
-        XCTAssertEqual("OOOO", lamps.topHours.joined())
+        XCTAssertEqual("OOOO", lamps.topHours.map({$0.rawValue}).joined())
     }
     func testTop5HourLamp_FirstOn(){
         let lamps = berlinClock.convertToBerlinTime("05:00:00")
-        XCTAssertEqual("ROOO", lamps.topHours.joined())
+        XCTAssertEqual("ROOO", lamps.topHours.map({$0.rawValue}).joined())
     }
     func testTop5HourLamp_FirstAndSecondOn(){
         let lamps = berlinClock.convertToBerlinTime("10:00:00")
-        XCTAssertEqual("RROO", lamps.topHours.joined())
+        XCTAssertEqual("RROO", lamps.topHours.map({$0.rawValue}).joined())
     }
     func testTop5HourLamp_AllOn(){
         let lamps = berlinClock.convertToBerlinTime("20:00:00")
-        XCTAssertEqual("RRRR", lamps.topHours.joined())
+        XCTAssertEqual("RRRR", lamps.topHours.map({$0.rawValue}).joined())
     }
     
     func testIntegrateSecondMinuteAndHour_AllLampOff(){
@@ -126,11 +126,11 @@ final class BerlinClockTests: XCTestCase {
 extension BerlinClockTests{
     
     func integrateSecondMinuteAndHour(lamps: BerlinClockLamps)-> String{
-        let secondsLamp = lamps.second
-        let topHoursLamps = lamps.topHours.joined()
-        let bottomHoursLamps = lamps.bottomHours.joined()
-        let topMinutesLamps = lamps.topMinutes.joined()
-        let bottomMinutesLamps = lamps.bottomMinutes.joined()
+        let secondsLamp = lamps.second.rawValue
+        let topHoursLamps = lamps.topHours.map({$0.rawValue}).joined()
+        let bottomHoursLamps = lamps.bottomHours.map({$0.rawValue}).joined()
+        let topMinutesLamps = lamps.topMinutes.map({$0.rawValue}).joined()
+        let bottomMinutesLamps = lamps.bottomMinutes.map({$0.rawValue}).joined()
         
         let berlinTime = "\(secondsLamp) \(topHoursLamps) \(bottomHoursLamps) \(topMinutesLamps) \(bottomMinutesLamps)"
         
