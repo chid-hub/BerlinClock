@@ -42,10 +42,14 @@ extension BerlinClockModel {
         return (0..<4).map { $0 < (minute % 5) ? .yellow : .off}
     }
     
+    private func isQuarterMinute(_ minute: Int) -> Bool {
+        return (minute % 3) == 0
+    }
+    
     private func checkTopFiveMinuteLamp(minute: Int) -> [Lamp]{
         var fiveMinuteLamp = Array<Lamp>(repeating: .off, count: 11)
         for i in 0..<(minute / 5) {
-            fiveMinuteLamp[i] = ((i + 1) % 3) == 0 ? .red : .yellow
+            fiveMinuteLamp[i] = isQuarterMinute(i + 1)  ? .red : .yellow
         }
         return fiveMinuteLamp
     }
