@@ -9,30 +9,36 @@ import XCTest
 @testable import BerlinClock
 
 final class BerlinClockTests: XCTestCase {
-
     let berlinClock = BerlinClockModel()
     
     func testSecondsLamp_Off(){
-        XCTAssertEqual("O", berlinClock.checkSecondsLamp(seconds: 1))
+        let lamps = berlinClock.convertToBerlinTime("00:00:01")
+        XCTAssertEqual("O", lamps.second)
     }
     func testSecondsLamp_On(){
-        XCTAssertEqual("Y", berlinClock.checkSecondsLamp(seconds: 2))
+        let lamps = berlinClock.convertToBerlinTime("00:00:00")
+        XCTAssertEqual("Y", lamps.second)
     }
     
     func testBottom1MinutesLamp_AllOff(){
-        XCTAssertEqual("OOOO", berlinClock.checkBottomOneMinuteLamp(minute: 0))
+        let lamps = berlinClock.convertToBerlinTime("00:00:00")
+        XCTAssertEqual("OOOO", lamps.bottomMinutes.joined())
     }
     func testBottom1MinutesLamp_FirstOn(){
-        XCTAssertEqual("YOOO", berlinClock.checkBottomOneMinuteLamp(minute: 1))
+        let lamps = berlinClock.convertToBerlinTime("00:01:0")
+        XCTAssertEqual("YOOO", lamps.bottomMinutes.joined())
     }
     func testBottom1MinutesLamp_FirstAndSecondOn(){
-        XCTAssertEqual("YYOO", berlinClock.checkBottomOneMinuteLamp(minute: 2))
+        let lamps = berlinClock.convertToBerlinTime("00:02:01")
+        XCTAssertEqual("YYOO", lamps.bottomMinutes.joined())
     }
     func testBottom1MinutesLamp_FirstAndSecondAndThirdOn(){
-        XCTAssertEqual("YYYO", berlinClock.checkBottomOneMinuteLamp(minute: 3))
+        let lamps = berlinClock.convertToBerlinTime("00:03:01")
+        XCTAssertEqual("YYYO", lamps.bottomMinutes.joined())
     }
     func testBottom1MinutesLamp_AllOn(){
-        XCTAssertEqual("YYYY", berlinClock.checkBottomOneMinuteLamp(minute: 4))
+        let lamps = berlinClock.convertToBerlinTime("00:04:01")
+        XCTAssertEqual("YYYY", lamps.bottomMinutes.joined())
     }
     
     func testTop5MinutesLamp_AllOff(){
@@ -83,22 +89,37 @@ final class BerlinClockTests: XCTestCase {
     
     func testIntegrateSecondMinuteAndHour_AllLampOff(){
         let lamps = berlinClock.convertToBerlinTime("00:00:01")
-        XCTAssertEqual("O OOOO OOOO OOOOOOOOOOO OOOO", lamps.integrateSecondMinuteAndHour())
+        XCTAssertEqual("O OOOO OOOO OOOOOOOOOOO OOOO", integrateSecondMinuteAndHour(lamps: lamps))
     }
     func testIntegrateSecondMinuteAndHour_SecondsLampOn(){
         let lamps = berlinClock.convertToBerlinTime("00:00:00")
-        XCTAssertEqual("Y OOOO OOOO OOOOOOOOOOO OOOO", lamps.integrateSecondMinuteAndHour())
+        XCTAssertEqual("Y OOOO OOOO OOOOOOOOOOO OOOO", integrateSecondMinuteAndHour(lamps: lamps))
     }
     func testIntegrateSecondMinuteAndHour_AllHoursOn(){
         let lamps = berlinClock.convertToBerlinTime("24:00:01")
-        XCTAssertEqual("O RRRR RRRR OOOOOOOOOOO OOOO", lamps.integrateSecondMinuteAndHour())
+        XCTAssertEqual("O RRRR RRRR OOOOOOOOOOO OOOO", integrateSecondMinuteAndHour(lamps: lamps))
     }
     func testIntegrateSecondMinuteAndHour_AllMinutesLampOn(){
         let lamps = berlinClock.convertToBerlinTime("00:59:59")
-        XCTAssertEqual("O OOOO OOOO YYRYYRYYRYY YYYY", lamps.integrateSecondMinuteAndHour())
+        XCTAssertEqual("O OOOO OOOO YYRYYRYYRYY YYYY", integrateSecondMinuteAndHour(lamps: lamps))
     }
     func testIntegrateSecondMinuteAndHour_MaximumLampOn(){
         let lamps = berlinClock.convertToBerlinTime("23:59:59")
-        XCTAssertEqual("O RRRR RRRO YYRYYRYYRYY YYYY", lamps.integrateSecondMinuteAndHour())    }
+        XCTAssertEqual("O RRRR RRRO YYRYYRYYRYY YYYY", integrateSecondMinuteAndHour(lamps: lamps))    }
     
+}
+
+extension BerlinClockTests{
+    
+    func integrateSecondMinuteAndHour(lamps: BerlinClockLamps)-> String{
+        let secondsLamp = lamps.second
+        let topHoursLamps = lamps.topHours.joined()
+        let bottomHoursLamps = lamps.bottomHours.joined()
+        let topMinutesLamps = lamps.topMinutes.joined()
+        let bottomMinutesLamps = lamps.bottomMinutes.joined()
+        
+        let berlinTime = "\(secondsLamp) \(topHoursLamps) \(bottomHoursLamps) \(topMinutesLamps) \(bottomMinutesLamps)"
+        
+        return berlinTime
+    }
 }
