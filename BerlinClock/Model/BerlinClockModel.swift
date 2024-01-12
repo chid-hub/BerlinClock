@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BerlinClockModel {
+struct BerlinClockModel {
    
     func convertToBerlinTime(_ date: Date) -> BerlinClockLamps { // Date input
        
@@ -37,7 +37,7 @@ class BerlinClockModel {
 extension BerlinClockModel {
     
     private func checkSecondsLamp(seconds: Int) -> Lamp{
-        return ((seconds % AppConstants.secondsLampBlinkPerSeconds) == 0) ? .yellow : .off
+        return ((seconds % AppConstants.secondsLampBlinkPer) == 0) ? .yellow : .off
     }
     
     private func checkBottomOneMinuteLamp(minute: Int) -> [Lamp]{
@@ -48,13 +48,17 @@ extension BerlinClockModel {
         return (minute % AppConstants.quartersInFiveMinutesLamp) == 0
     }
     
-    private func checkTopFiveMinuteLamp(minute: Int) -> [Lamp]{
-        var fiveMinuteLamp = Array<Lamp>(repeating: .off, count: 11)
-        for i in 0..<(minute / 5) {
-            fiveMinuteLamp[i] = isQuarterMinute(i + 1)  ? .red : .yellow
+    private func checkTopFiveMinuteLamp(minute: Int) -> [Lamp] {
+        let onLamps: [Lamp] = (0..<(minute / 5)).map { index in
+            return isQuarterMinute(index + 1) ? .red : .yellow
         }
-        return fiveMinuteLamp
+
+        let offLampsCount = max(0, AppConstants.numberOfFiveMinuteLamp - onLamps.count)
+        let offLamps = Array<Lamp>(repeating: .off, count: offLampsCount)
+
+        return onLamps + offLamps
     }
+
     
     private func checkBottomOneHourLamp(hour: Int) -> [Lamp]{
         return (0..<AppConstants.numberOfOneHourLamp).map { $0 < (hour % 5) ? .red : .off}
@@ -64,3 +68,5 @@ extension BerlinClockModel {
         return (0..<AppConstants.numberOfFiveHourLamp).map { $0 < (hour / 5) ? .red : .off}
     }
 }
+
+

@@ -9,7 +9,7 @@ import Foundation
 
 class AppConstants{
     
-    static let secondsLampBlinkPerSeconds: Int = 2
+    static let secondsLampBlinkPer: Int = 2
     static let numberOfFiveHourLamp: Int = 4
     static let numberOfOneHourLamp: Int = 4
     static let numberOfFiveMinuteLamp: Int = 11
