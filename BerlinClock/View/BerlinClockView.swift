@@ -20,17 +20,20 @@ struct BerlinClockView: View {
                 .foregroundColor(.blue)
                 .padding(.top, 20)
             
+
             BerlinClockLampsView(berlinClockLamps: $viewModel.berlinClockLamps)
                 .frame(width: 150, height: 200)
                 .padding()
+            
+            DigitalClockView(timeInput: viewModel.timeInput)
+
         }
         .onAppear {
             startTimer()
         }
         .onDisappear {
             stopTimer()
-        }.background()
-        .padding()
+        }.padding()
     }
     private func startTimer() {
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
