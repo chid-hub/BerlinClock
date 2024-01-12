@@ -26,7 +26,7 @@ enum Lamp: String{
 }
 
 struct BerlinClockLamps {
-    // initial set all values to off
+    // initially set all values to off
     var second: Lamp = .off
     var topHours: [Lamp] = Array(repeating: .off, count: AppConstants.numberOfFiveHourLamp)
     var bottomHours: [Lamp] = Array(repeating: .off, count: AppConstants.numberOfOneHourLamp)

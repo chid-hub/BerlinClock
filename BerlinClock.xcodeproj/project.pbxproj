@@ -84,11 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				E6FAEE692B4E89C4002B820D /* BerlinClockView.swift */,
-				E65C87912B510FD800056C4D /* SecondsLampView.swift */,
-				E65C87932B51106F00056C4D /* LampView.swift */,
-				E65C87952B5110D500056C4D /* FiveMinuteLampView.swift */,
-				E65C87972B5115BF00056C4D /* BerlinClockLampsView.swift */,
-				E65C87992B512EC700056C4D /* DigitalClockView.swift */,
+				E65C879B2B51306A00056C4D /* HelperView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -108,6 +104,18 @@
 				E65C878F2B510D0C00056C4D /* BerlinClockViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E65C879B2B51306A00056C4D /* HelperView */ = {
+			isa = PBXGroup;
+			children = (
+				E65C87912B510FD800056C4D /* SecondsLampView.swift */,
+				E65C87932B51106F00056C4D /* LampView.swift */,
+				E65C87952B5110D500056C4D /* FiveMinuteLampView.swift */,
+				E65C87972B5115BF00056C4D /* BerlinClockLampsView.swift */,
+				E65C87992B512EC700056C4D /* DigitalClockView.swift */,
+			);
+			path = HelperView;
 			sourceTree = "<group>";
 		};
 		E6FAEE5B2B4E89C4002B820D = {
@@ -131,8 +139,8 @@
 		E6FAEE662B4E89C4002B820D /* BerlinClock */ = {
 			isa = PBXGroup;
 			children = (
-				E65C878E2B510CEF00056C4D /* ViewModel */,
 				E65C878B2B510C8500056C4D /* App */,
+				E65C878E2B510CEF00056C4D /* ViewModel */,
 				E65C878C2B510C8D00056C4D /* View */,
 				E65C878D2B510CE400056C4D /* Model */,
 				E6FAEE6D2B4E89C5002B820D /* Preview Content */,
