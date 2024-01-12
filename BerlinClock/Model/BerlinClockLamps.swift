@@ -6,11 +6,23 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum Lamp: String{
    case off = "O"
    case red = "R"
    case yellow = "Y"
+    
+    var color: Color {
+        switch self {
+        case .off:
+            return .gray
+        case .red:
+            return .red
+        case .yellow:
+            return .yellow
+        }
+    }
 }
 
 struct BerlinClockLamps {
