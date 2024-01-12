@@ -9,7 +9,9 @@ import Foundation
 
 class BerlinClockModel {
    
-    func convertToBerlinTime(_ time: String) -> BerlinClockLamps {
+    func convertToBerlinTime(_ date: Date) -> BerlinClockLamps { // Date input
+       
+        let time = date.toString()
         let components = time.components(separatedBy: ":")
         
         guard components.count == 3,

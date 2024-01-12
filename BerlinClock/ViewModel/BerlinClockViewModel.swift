@@ -16,14 +16,12 @@ class BerlinClockViewModel: ObservableObject {
 
     private let berlinClockModel = BerlinClockModel()
 
-    func convertToBerlinTime() {
-        berlinClockLamps = berlinClockModel.convertToBerlinTime(timeInput)
+    func convertToBerlinTime(_ date: Date) {
+        berlinClockLamps = berlinClockModel.convertToBerlinTime(date)
     }
 
     func updateCurrentTime() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss"
-        timeInput = dateFormatter.string(from: Date())
-        convertToBerlinTime()
+        timeInput = Date().toString()
+        convertToBerlinTime(Date())
     }
 }
