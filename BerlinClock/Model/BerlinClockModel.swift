@@ -11,21 +11,13 @@ struct BerlinClockModel {
    
     func convertToBerlinTime(_ date: Date) -> BerlinClockLamps { // Date input
        
-        let time = date.toString()
-        let components = time.components(separatedBy: ":")
+        let time = getTimeComponents(from: date)
         
-        guard components.count == 3,
-              let hours = Int(components[0]),
-              let minutes = Int(components[1]),
-              let seconds = Int(components[2]) else {
-            return BerlinClockLamps()
-        }
-        
-        let secondsLamp = checkSecondsLamp(seconds: seconds)
-        let topHoursLamps = checkTopFiveHourLamp(hour: hours)
-        let bottomHoursLamps = checkBottomOneHourLamp(hour: hours)
-        let topMinutesLamps = checkTopFiveMinuteLamp(minute: minutes)
-        let bottomMinutesLamps = checkBottomOneMinuteLamp(minute: minutes)
+        let secondsLamp = checkSecondsLamp(seconds: time.seconds)
+        let topHoursLamps = checkTopFiveHourLamp(hour: time.hours)
+        let bottomHoursLamps = checkBottomOneHourLamp(hour: time.hours)
+        let topMinutesLamps = checkTopFiveMinuteLamp(minute: time.minutes)
+        let bottomMinutesLamps = checkBottomOneMinuteLamp(minute: time.minutes)
         
         let berlinClockLamps = BerlinClockLamps(second: secondsLamp, topHours: topHoursLamps, bottomHours: bottomHoursLamps, topMinutes:topMinutesLamps, bottomMinutes: bottomMinutesLamps)
             
@@ -66,6 +58,17 @@ extension BerlinClockModel {
     
     private func checkTopFiveHourLamp(hour: Int) -> [Lamp]{
         return (0..<AppConstants.numberOfFiveHourLamp).map { $0 < (hour / 5) ? .red : .off}
+    }
+    
+    func getTimeComponents(from date: Date) -> (hours: Int, minutes: Int, seconds: Int) {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute, .second], from: date)
+
+        let hours = components.hour ?? 0
+        let minutes = components.minute ?? 0
+        let seconds = components.second ?? 0
+
+        return (hours, minutes, seconds)
     }
 }
 
