@@ -8,11 +8,41 @@
 import SwiftUI
 
 struct BerlinClockView: View {
+    
+    @ObservedObject var viewModel = BerlinClockViewModel()
+    @State private var timer: Timer?
+    
     var body: some View {
         VStack {
+            Text("Berlin Clock")
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.blue)
+                .padding(.top, 20)
             
+            BerlinClockLampsView(berlinClockLamps: $viewModel.berlinClockLamps)
+                .frame(width: 150, height: 200)
+                .padding()
         }
+        .onAppear {
+            startTimer()
+        }
+        .onDisappear {
+            stopTimer()
+        }.background()
         .padding()
+    }
+    private func startTimer() {
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            withAnimation {
+                viewModel.updateCurrentTime()
+            }
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
     }
 }
 
