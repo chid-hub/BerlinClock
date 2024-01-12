@@ -10,7 +10,6 @@ import SwiftUI
 struct BerlinClockView: View {
     
     @ObservedObject var viewModel = BerlinClockViewModel()
-    @State private var timer: Timer?
     
     var body: some View {
         VStack {
@@ -21,7 +20,7 @@ struct BerlinClockView: View {
                 .padding(.top, 20)
             
 
-            BerlinClockLampsView(berlinClockLamps: $viewModel.berlinClockLamps)
+            BerlinClockLampsView(berlinClockLamps: viewModel.berlinClockLamps)
                 .frame(width: 150, height: 200)
                 .padding()
             
@@ -29,23 +28,11 @@ struct BerlinClockView: View {
 
         }
         .onAppear {
-            startTimer()
+            viewModel.startTimer()
         }
         .onDisappear {
-            stopTimer()
+            viewModel.stopTimer()
         }.padding()
-    }
-    private func startTimer() {
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            withAnimation {
-                viewModel.updateCurrentTime()
-            }
-        }
-    }
-    
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
     }
 }
 

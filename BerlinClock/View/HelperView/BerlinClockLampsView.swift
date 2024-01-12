@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BerlinClockLampsView: View {
     
-    @Binding var berlinClockLamps: BerlinClockLamps
+     var berlinClockLamps: BerlinClockLamps
 
     var body: some View {
            VStack(spacing: 8) {
@@ -42,8 +42,7 @@ struct BerlinClockLampsView: View {
 }
 
 struct BerlinClockLampsView_Previews: PreviewProvider {
-    @State static private var previewLamps: BerlinClockLamps = BerlinClockLamps()
     static var previews: some View {
-        BerlinClockLampsView(berlinClockLamps: $previewLamps)
+        BerlinClockLampsView(berlinClockLamps: BerlinClockLamps())
     }
 }
